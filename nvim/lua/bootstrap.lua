@@ -20,7 +20,7 @@ local opts = {
     -- version = "*", -- enable this to try installing the latest stable versions of plugins
   },
   -- leave nil when passing the spec as the first argument to setup()
-  spec = nil, ---@type LazySpec
+  spec = nil, --- 
   lockfile = vim.fn.stdpath "data" .. "/lazy-lock.json", -- lockfile generated after running update.
   concurrency = nil, ---@type number limit the maximum amount of concurrent tasks
   git = {

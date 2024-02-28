@@ -7,12 +7,12 @@ return {
     local lualine = require("lualine")
     local working_directory = function() 
       local path = vim.fn.getcwd()
-      rendered_path = string.match(path, "/([^/]+)$")
+      local rendered_path = string.match(path, "/([^/]+)$")
       return rendered_path
     end
     local lsp_status = function()
       local clients = vim.lsp.get_active_clients()
-      if table.getn(clients) <= 0 then
+      if table.maxn(clients) <= 0 then
           return "LSP Inactive"
       else
           return "LSP Active"

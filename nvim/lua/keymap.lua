@@ -28,6 +28,13 @@ function M.global()
 
     -- Nvim tree
     keymap("n", "<leader>E", ":NvimTreeToggle<cr>", opts)
+
+    -- Trouble LSP pretty window
+    vim.keymap.set("n", "<leader>xw", function() require("trouble").toggle("workspace_diagnostics") end)
+    vim.keymap.set("n", "<leader>xq", function() require("trouble").toggle("quickfix") end)
+    vim.keymap.set("n", "<leader>xr", function() require("trouble").toggle("quickfix") end)
+    vim.keymap.set("n", "<leader>xc", function() require("trouble").close() end)
+
 end
 
 --- Attachs LSP related keymaps to the specified buffer
