@@ -1,4 +1,5 @@
-require("core.settings")
-require("core.keymappings")
+require("settings")
 require("bootstrap")
 require("themes")
+require("keymap").global()
+require("autocmd")

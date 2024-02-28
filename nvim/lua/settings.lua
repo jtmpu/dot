@@ -2,6 +2,9 @@ local fn = vim.fn
 local opt = vim.opt
 local wo = vim.wo
 
+-- Leader
+vim.g.mapleader = ' '
+
 -- Clipboard
 opt.clipboard = "unnamedplus"
 
