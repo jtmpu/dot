@@ -40,27 +40,24 @@ local keybinds = {
 }
 
 -- Define supported domains
-local wsl_domains = {
+local ssh_domains = {
     {
-        name = "WSL:Dev",
-        distribution = "Ubuntu",
+        name = "dev",
+        remote_address = "127.0.0.1:60022",
         username = "user",
-        default_cwd = "~",
-        default_prog = { "/bin/bash" },
     },
 }
 
--- Define launch menu
+local default_prog = { "/bin/bash" }
+if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
+	default_prog = { "powershell.exe", "-NoLogo" }
+end
 
--- config.wsl_domains = wsl_domains
--- config.default_domain = "WSL:Dev"
--- config.leader = leader
--- config.keys = keybinds
--- config.launch_menu = launch_menu
--- return config
 return {
-    wsl_domains = wsl_domains,
-    default_domain = "WSL:Dev",
+    initial_cols = 120,
+    initial_rows = 36,
+    default_prog = default_prog,
+    ssh_domains = ssh_domains,
     audible_bell = "Disabled",
     window_decorations = "TITLE|RESIZE",
     enable_tab_bar = false,
