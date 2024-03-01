@@ -26,8 +26,10 @@ function M.global()
     keymap("v", "<leader>y", "\"+y", opts)
     keymap("n", "<leader>Y", "\"+Y", opts)
 
-    -- Nvim tree
-    keymap("n", "<leader>E", ":NvimTreeToggle<cr>", opts)
+
+    keymap("n", "<leader>eb", ":Neotree focus source=buffers<cr>", opts)
+    keymap("n", "<leader>ef", ":Neotree focus source=filesystem<cr>", opts)
+    keymap("n", "<leader>eg", ":Neotree focus source=git_status<cr>", opts)
 
     -- Trouble LSP pretty window
     vim.keymap.set("n", "<leader>xw", function() require("trouble").toggle("workspace_diagnostics") end)
