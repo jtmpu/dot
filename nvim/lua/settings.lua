@@ -34,6 +34,7 @@ opt.undofile = true
 opt.termguicolors = true
 opt.wrap = false
 opt.scrolloff = 8
+opt.signcolumn = "yes:1"
 
 -- Searching
 opt.hlsearch = false
