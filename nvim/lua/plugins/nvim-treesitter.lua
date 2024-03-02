@@ -1,3 +1,4 @@
+-- Used for improved highlighting and motions
 return {
   "nvim-treesitter/nvim-treesitter",
   build = ":TSUpdate",

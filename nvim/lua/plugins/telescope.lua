@@ -1,3 +1,4 @@
+-- Used for better navigation and searching
 return {
   "nvim-telescope/telescope.nvim",
   tag = "0.1.5",

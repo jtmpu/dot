@@ -1,3 +1,4 @@
+-- So I more easily remember keybinds, marks and stuff
 return {
     "folke/which-key.nvim",
     event = "VeryLazy",

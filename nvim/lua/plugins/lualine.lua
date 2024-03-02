@@ -1,3 +1,4 @@
+-- A nicer status bar
 return {
   "nvim-lualine/lualine.nvim",
   dependencies = {
@@ -5,7 +6,7 @@ return {
   },
   config = function()
     local lualine = require("lualine")
-    local working_directory = function() 
+    local working_directory = function()
       local path = vim.fn.getcwd()
       local rendered_path = string.match(path, "/([^/]+)$")
       return rendered_path
@@ -54,8 +55,10 @@ return {
         lualine_a = {working_directory},
         lualine_b = {"branch"},
         lualine_c = {"diagnostics"},
+        -- TODO: Show identifed language instead?
         lualine_x = {"encoding"},
         lualine_y = {"diff"},
+        -- TODO: show which server used? Count?
         lualine_z = {lsp_status}
       },
       inactive_sections = {

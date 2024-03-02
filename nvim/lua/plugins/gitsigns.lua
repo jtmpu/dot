@@ -1,3 +1,4 @@
+-- Used to show sign-col, and git blame inline
 return {
     "lewis6991/gitsigns.nvim",
     config = function()

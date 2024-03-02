@@ -1,3 +1,4 @@
+-- Used for quick-nav between files
 return {
     "ThePrimeagen/harpoon",
     branch = "harpoon2",

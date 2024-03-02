@@ -1,3 +1,4 @@
+-- Use for language server integrations, autocomplete, generating diagnostics
 return {
     "neovim/nvim-lspconfig",
     dependencies = {
