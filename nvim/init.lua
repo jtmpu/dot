@@ -1,5 +1,5 @@
 require("settings")
 require("bootstrap")
 require("themes")
-require("keymap").global()
+require("keymap")
 require("autocmd")
