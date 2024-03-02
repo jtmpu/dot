@@ -29,11 +29,14 @@ local keybinds = {
     { key = "RightArrow", mods = "LEADER", action = wezterm.action.ActivatePaneDirection("Right") },
     { key = "l", mods = "LEADER", action = wezterm.action.ActivatePaneDirection("Right") },
 
+    -- Copy/pasting
+    { key = "c", mods = "CTRL|SHIFT", action = wezterm.action.CopyTo "Clipboard" },
+    { key = "v", mods = "CTRL|SHIFT", action = wezterm.action.PasteFrom "Clipboard" },
+    { key = "x", mods = "CTRL|SHIFT", action = wezterm.action.ActivateCopyMode },
+    
     -- Global
     { key = "P", mods = "LEADER|SHIFT", action = wezterm.action.ActivateCommandPalette },
     { key = "F11", action = wezterm.action.ToggleFullScreen },
-    { key = "c", mods = "CTRL|SHIFT", action = wezterm.action.CopyTo "Clipboard" },
-    { key = "v", mods = "CTRL|SHIFT", action = wezterm.action.PasteFrom "Clipboard" },
     { key = "R", mods = "CTRL|SHIFT", action = wezterm.action.ReloadConfiguration },
     { key = "PageUp", mods = "SHIFT", action = wezterm.action.ScrollByPage(-1) },
     { key = "PageDown", mods = "SHIFT", action = wezterm.action.ScrollByPage(1) },
