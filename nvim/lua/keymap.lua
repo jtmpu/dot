@@ -26,8 +26,10 @@ function M.global()
     keymap("v", "<leader>y", "\"+y", opts)
     keymap("n", "<leader>Y", "\"+Y", opts)
 
-    -- Nvim tree
-    keymap("n", "<leader>E", ":NvimTreeToggle<cr>", opts)
+    -- Neo tree explorer
+    keymap("n", "<leader>eb", ":Neotree focus source=buffers<cr>", opts)
+    keymap("n", "<leader>ef", ":Neotree focus source=filesystem<cr>", opts)
+    keymap("n", "<leader>eg", ":Neotree focus source=git_status<cr>", opts)
 
     -- Trouble LSP pretty window
     vim.keymap.set("n", "<leader>xw", function() require("trouble").toggle("workspace_diagnostics") end)
@@ -35,6 +37,16 @@ function M.global()
     vim.keymap.set("n", "<leader>xr", function() require("trouble").toggle("lsp_references") end)
     vim.keymap.set("n", "<leader>xc", function() require("trouble").close() end)
 
+    -- Harpoon
+    local harpoon = require("harpoon")
+    vim.keymap.set("n", "<leader>ha", function() harpoon:list():append() end)
+    vim.keymap.set("n", "<leader>hs", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+    vim.keymap.set("n", "<C-f>", function() harpoon:list():select(1) end)
+    vim.keymap.set("n", "<C-g>", function() harpoon:list():select(2) end)
+    vim.keymap.set("n", "<C-n>", function() harpoon:list():select(3) end)
+    vim.keymap.set("n", "<C-m>", function() harpoon:list():select(4) end)
+    vim.keymap.set("n", "<C-t>", function() harpoon:list():select(5) end)
+    vim.keymap.set("n", "<C-,>", function() harpoon:list():select(6) end)
 end
 
 --- Attachs LSP related keymaps to the specified buffer
