@@ -135,6 +135,14 @@ wk.register({
             "<cmd>Git commit<cr>",
             "stage",
         },
+        p = {
+            "<cmd>Git push<cr>",
+            "push",
+        },
+        P = {
+            "<cmd>Git pull<cr>",
+            "pull",
+        },
         b = {
             "<cmd>:Git blame<cr>",
             "blame",
