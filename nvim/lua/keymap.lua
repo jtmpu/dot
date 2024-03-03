@@ -91,6 +91,20 @@ wk.register({
             "<cmd>Telescope<cr>",
             "telescope",
         },
+        w = {
+            function()
+                local word = vim.fn.expand("<cword>")
+                telescope.grep_string({ search = word })
+            end,
+            "grep (<cword>)"
+        },
+        W = {
+            function()
+                local word = vim.fn.expand("<cWORD>")
+                telescope.grep_string({ search = word })
+            end,
+            "grep (<cWORD>)"
+        }
     },
     g = {
         name = "git",
@@ -112,6 +126,14 @@ wk.register({
                 "<cmd>Gitsigns toggle_signs<cr>",
                 "sign-col highlight",
             },
+        },
+        s = {
+            "<cmd>Git<cr>",
+            "stage",
+        },
+        c = {
+            "<cmd>Git commit<cr>",
+            "stage",
         },
         b = {
             "<cmd>:Git blame<cr>",
