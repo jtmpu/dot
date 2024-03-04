@@ -16,8 +16,8 @@ local keybinds = {
     { key = "p", mods = "LEADER", action = wezterm.action.ActivateTabRelative(-1) },
 
     -- Pane management
-    { key = "%", mods = "LEADER|SHIFT", action = wezterm.action.SplitVertical { domain = "CurrentPaneDomain" } },
-    { key = '"', mods = "LEADER|SHIFT", action = wezterm.action.SplitHorizontal { domain = "CurrentPaneDomain" } },
+    { key = '"', mods = "LEADER|SHIFT", action = wezterm.action.SplitVertical { domain = "CurrentPaneDomain" } },
+    { key = '%', mods = "LEADER|SHIFT", action = wezterm.action.SplitHorizontal { domain = "CurrentPaneDomain" } },
     { key = 'x', mods = "LEADER", action = wezterm.action.CloseCurrentPane { confirm = false } },
     { key = 'z', mods = "LEADER", action = wezterm.action.TogglePaneZoomState },
     { key = "UpArrow", mods = "LEADER", action = wezterm.action.ActivatePaneDirection("Up") },
@@ -56,12 +56,16 @@ if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
 	default_prog = { "powershell.exe", "-NoLogo" }
 end
 
+-- disable ligatures != 
+local harfbuzz_features = {"calt=0", "clig=0", "liga=0"}
+
 return {
     initial_cols = 120,
     initial_rows = 36,
     default_prog = default_prog,
     ssh_domains = ssh_domains,
     audible_bell = "Disabled",
+    harfbuzz_features = harfbuzz_features,
     window_decorations = "TITLE|RESIZE",
     enable_tab_bar = false,
     color_scheme = color_scheme,
