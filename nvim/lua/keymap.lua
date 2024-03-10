@@ -72,7 +72,7 @@ wk.register({
     f = {
         name = "find",
         f = {
-            function() telescope.git_files() end,
+            function() telescope.git_files({ use_git_root = false }) end,
             "files (git)",
         },
         F = {
@@ -104,7 +104,11 @@ wk.register({
                 telescope.grep_string({ search = word })
             end,
             "grep (<cWORD>)"
-        }
+        },
+        q = {
+            function() telescope.quickfix() end,
+            "quickfix",
+        },
     },
     g = {
         name = "git",
@@ -225,12 +229,27 @@ function M.lsp_attach(bufopts)
             a = { function() vim.lsp.buf.code_action() end, "code action" },
             r = {
                 name = "reference",
-                r = { function() vim.lsp.buf.references() end, "list" },
+                c = {
+                    function() require("telescope.builtin").lsp_incoming_calls() end,
+                    "incoming calls"
+                },
+                C = {
+                    function() require("telescope.builtin").lsp_outgoing_calls() end,
+                    "outgoing calls"
+                },
+                r = {
+                    function() require("telescope.builtin").lsp_references() end,
+                    "list"
+                },
                 n = { function() vim.lsp.buf.rename() end, "rename" },
             },
             f = {
                 function() vim.lsp.buf.format({ async = true }) end,
                 "format",
+            },
+            s = {
+                function() require("telescope.builtin").lsp_document_symbols() end,
+                "symbols (buffer)",
             }
         }
     }, opts)
