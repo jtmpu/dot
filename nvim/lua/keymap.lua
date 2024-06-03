@@ -43,6 +43,11 @@ local normal_opts = {
     expr = false,
 }
 wk.register({
+    b = {
+        name = "buffer",
+        c = { "<cmd>enew<cr><cmd>bd #<cr>", "close" },
+        C = { "<cmd>enew<cr><cmd>%bd<cr>", "close all" },
+    },
     e = {
         name = "explorer",
         -- Neo tree explorer
@@ -108,6 +113,10 @@ wk.register({
         q = {
             function() telescope.quickfix() end,
             "quickfix",
+        },
+        s = {
+            function() telescope.git_status() end,
+            "git-status",
         },
     },
     g = {
