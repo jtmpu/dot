@@ -19,6 +19,7 @@ return {
     local setup = {
       ensure_installed = {
         "bash",
+        "starlark",
         "c",
         "css",
         "diff",
@@ -38,6 +39,7 @@ return {
         "toml",
         "typescript",
         "vim",
+        "vimdoc",
         "yaml",
       },
       highlight = {

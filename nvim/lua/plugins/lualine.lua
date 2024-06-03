@@ -25,23 +25,6 @@ return {
         theme = "auto",
         component_separators = { left = '', right = ''},
         section_separators = { left = '', right = ''},
-        disabled_filetypes = {
-          statusline = {},
-          winbar = {
-            "help",
-            "startify",
-            "dashboard",
-            "packer",
-            "neogitstatus",
-            "NvimTree",
-            "Trouble",
-            "alpha",
-            "lir",
-            "Outline",
-            "spectre_panel",
-            "toggleterm",
-          },
-        },
         ignore_focus = {},
         always_divide_middle = true,
         globalstatus = false,
@@ -54,10 +37,10 @@ return {
       sections = {
         lualine_a = {working_directory},
         lualine_b = {"branch"},
-        lualine_c = {"diagnostics"},
+        lualine_c = {{'filename', file_status = false, path = 1}},
         -- TODO: Show identifed language instead?
-        lualine_x = {"encoding"},
-        lualine_y = {"diff"},
+        lualine_x = {"filetype"},
+        lualine_y = {"diff", "diagnostics"},
         -- TODO: show which server used? Count?
         lualine_z = {lsp_status}
       },
@@ -72,7 +55,11 @@ return {
       tabline = {},
       winbar = {},
       inactive_winbar = {},
-      extensions = {},
+      extensions = {
+        "neo-tree",
+        "fugitive",
+        "trouble",
+      },
     }
 
     lualine.setup(setup)
