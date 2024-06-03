@@ -49,14 +49,6 @@ local ssh_domains = {
         remote_address = "127.0.0.1:60022",
         username = "user",
     },
-    {
-	name = "wdev",
-	remote_address = "127.0.0.1",
-	username = "user",
-	ssh_option = {
-		identityfile = "C:\\Users\\joakim.valberg\\.ssh\\ssh-local",
-	}
-    },
 }
 
 local default_prog = { "/bin/bash" }
