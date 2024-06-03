@@ -6,7 +6,7 @@ local color_scheme = 'Tokyo Night'
 local font = wezterm.font "JetBrains Mono"
 
 -- Keybinds - tmux-esque
-local leader = { key = "b", mods = "CTRL" }
+local leader = { key = "v", mods = "CTRL" }
 local keybinds = {
     -- Tab management
     { key = '&', mods = "LEADER|SHIFT", action = wezterm.action.CloseCurrentTab { confirm = false } },
