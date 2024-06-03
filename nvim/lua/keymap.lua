@@ -11,9 +11,11 @@ keymap("n", "<C-l>", "<C-w>l", default_opts)
 keymap("n", "<S-l>", ":bnext<CR>", default_opts)
 keymap("n", "<S-h>", ":bprevious<CR>", default_opts)
 
--- Move text up and down
+-- Move text and maintain selection
 keymap("v", "J", ":m '>+1<CR>gv=gv", default_opts)
 keymap("v", "K", ":m '<-2<CR>gv=gv", default_opts)
+keymap("v", "<", "<gv", default_opts)
+keymap("v", ">", ">gv", default_opts)
 
 -- Better scrolling
 keymap("n", "<C-d>", "<C-d>zz", default_opts)
