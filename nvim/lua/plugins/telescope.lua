@@ -11,7 +11,7 @@ return {
 
         -- Enable opening telescope searches in trouble
         local actions = require("telescope.actions")
-        local trouble = require("trouble.providers.telescope")
+        local trouble = require("trouble.sources.telescope")
         telescope.setup({
             defaults = {
                 mappings = {
