@@ -17,7 +17,7 @@ opt.ignorecase = true -- ignore case letters in search
 opt.smartcase = true  -- ignore lowercase for whole pattern
 
 wo.number = true
-vim.o.mouse = false
+vim.o.mouse = ""
 
 -- Tabs, indents
 opt.expandtab = true
