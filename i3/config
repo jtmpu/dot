@@ -69,7 +69,7 @@ bindsym $mod+Return exec wezterm
 bindsym $mod+Shift+q kill
 
 # app launcher
-bindcode $mod+40 exec "rofi -modi drun,run -show drun"
+bindsym $mod+d exec "rofi -modi drun,run -show drun -show-icons"
 
 # printscreen
 bindsym Print exec "$HOME/.config/i3/scripts/screenshot.sh"
