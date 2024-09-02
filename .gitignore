@@ -1,1 +1,6 @@
 backups/successful.txt
+
+pulse/*.tdb
+pulse/*-sink
+pulse/*-source
+pulse/cookie
