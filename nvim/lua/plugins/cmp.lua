@@ -35,6 +35,5 @@ return {
                 { name = "buffer" },
             }),
         })
-        local lsp = require("cmp_nvim_lsp")
     end,
 }
