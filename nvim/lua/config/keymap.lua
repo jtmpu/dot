@@ -44,38 +44,21 @@ local normal_opts = {
     nowait = false,
     expr = false,
 }
+wk.add({
+    { "<leader>b", group = "buffer" },
+    { "<leader>bc", "<cmd>enew<cr><cmd>bd #<cr>", desc = "close" },
+    { "<leader>bC", "<cmd>enew<cr><cmd>%bd<cr>", desc = "close all" },
+    { "<leader>e", group = "explorer" },
+    { "<leader>eb", "<cmd>Neotree focus source=buffers<cr>", desc = "buffers" },
+    { "<leader>ef", "<cmd>Neotree focus source=filesystem<cr>", desc = "filesystem" },
+    { "<leader>eg", "<cmd>Neotree focus source=git_status<cr>", desc = "git" },
+    { "<leader>d", group = "diagnostics" },
+    { "<leader>dd", function() telescope.diagnostics() end, desc = "diagnostics search" },
+    { "<leader>dw", function() require("trouble").toggle("workspace_diagnostics") end, desc = "workspace show" },
+    { "<leader>dq", function() telescope.quickfix() end, desc = "quickfixes search" },
+    { "<leader>dQ", function() require("trouble").toggle("quickfix") end, desc = "quickfixes show" },
+})
 wk.register({
-    b = {
-        name = "buffer",
-        c = { "<cmd>enew<cr><cmd>bd #<cr>", "close" },
-        C = { "<cmd>enew<cr><cmd>%bd<cr>", "close all" },
-    },
-    e = {
-        name = "explorer",
-        -- Neo tree explorer
-        b = { "<cmd>Neotree focus source=buffers<cr>", "buffers" },
-        f = { "<cmd>Neotree focus source=filesystem<cr>", "filesystem" },
-        g = { "<cmd>Neotree focus source=git_status<cr>", "git" },
-    },
-    d = {
-        name = "diagnostics",
-        d = {
-            function() telescope.diagnostics() end,
-            "diagnostics search",
-        },
-        w = {
-            function() require("trouble").toggle("workspace_diagnostics") end,
-            "workspace show",
-        },
-        q = {
-            function() telescope.quickfix() end,
-            "quickfixes search",
-        },
-        Q = {
-            function() require("trouble").toggle("quickfix") end,
-            "quickfixes show",
-        },
-    },
     f = {
         name = "find",
         f = {
