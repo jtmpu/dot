@@ -4,6 +4,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
     callback = function(ev)
         local opts =  { buffer = ev.buf }
         -- Hook up my LSP buffer keybinds
-        require("keymap").lsp_attach(opts)
+        require("config.keymap").lsp_attach(opts)
     end,
 })

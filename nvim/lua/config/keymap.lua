@@ -122,58 +122,23 @@ wk.register({
         },
     },
     g = {
-        name = "git",
-        t = {
-            name = "toggle",
-            b = {
-                "<cmd>Gitsigns toggle_current_line_blame<cr>",
-                "blame",
-            },
-            l = {
-                "<cmd>Gitsigns toggle_linehl<cr>",
-                "line highlight",
-            },
-            w = {
-                "<cmd>Gitsigns toggle_word_diff<cr>",
-                "word highlight",
-            },
-            s = {
-                "<cmd>Gitsigns toggle_signs<cr>",
-                "sign-col highlight",
-            },
-        },
-        s = {
-            "<cmd>Git<cr>",
-            "stage",
-        },
-        c = {
-            "<cmd>Git commit<cr>",
-            "stage",
-        },
-        p = {
-            "<cmd>Git push<cr>",
-            "push",
-        },
-        P = {
-            "<cmd>Git pull<cr>",
-            "pull",
-        },
+        name = "git-toggles",
         b = {
-            "<cmd>:Git blame<cr>",
+            "<cmd>Gitsigns toggle_current_line_blame<cr>",
             "blame",
         },
-        d = {
-            "<cmd>:Gdiffsplit<cr>",
-            "diff file",
+        l = {
+            "<cmd>Gitsigns toggle_linehl<cr>",
+            "line highlight",
         },
-        D = {
-            "<cmd>:Gdiffsplit<cr>",
-            "diff all",
+        w = {
+            "<cmd>Gitsigns toggle_word_diff<cr>",
+            "word highlight",
         },
-        m = {
-            "<cmd>:Git mergetool<cr>",
-            "merge tool",
-        }
+        s = {
+            "<cmd>Gitsigns toggle_signs<cr>",
+            "sign-col highlight",
+        },
     },
     m = {
         name = "marks",
