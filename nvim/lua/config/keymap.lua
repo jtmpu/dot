@@ -34,16 +34,6 @@ local wk = require("which-key")
 local telescope = require("telescope.builtin")
 local config_dir = vim.fn.stdpath("config")
 
--- Normal mode binds
-local normal_opts = {
-    mode = "n",
-    prefix = "<leader>",
-    buffer = nil,
-    silent = true,
-    noremap = true,
-    nowait = false,
-    expr = false,
-}
 wk.add({
     { "<leader>b", group = "buffer" },
     { "<leader>bc", "<cmd>enew<cr><cmd>bd #<cr>", desc = "close" },
@@ -57,161 +47,44 @@ wk.add({
     { "<leader>dw", function() require("trouble").toggle("workspace_diagnostics") end, desc = "workspace show" },
     { "<leader>dq", function() telescope.quickfix() end, desc = "quickfixes search" },
     { "<leader>dQ", function() require("trouble").toggle("quickfix") end, desc = "quickfixes show" },
+    { "<leader>f", group = "find" },
+    { "<leader>ff", function() telescope.git_files({ use_git_root = false }) end, desc = "files (git)" },
+    { "<leader>fF", function() telescope.find_files() end, desc = "files (all)" },
+    { "<leader>fg", function() telescope.live_grep() end, desc = "grep" },
+    { "<leader>fb", function() telescope.buffers() end, desc = "buffers" },
+    { "<leader>ft", "<cmd>Telescope<cr>", desc = "telescope" },
+    { "<leaderfq", function() telescope.quickfix() end, desc = "quickfix" },
+    { "<leader>fs", function() telescope.git_status() end, desc = "git-status" },
+    { "<leader>g", group = "git-toggles" },
+    { "<leader>gb", "<cmd>Gitsigns toggle_current_line_blame<cr>", desc = "blame", },
+    { "<leader>gl", "<cmd>Gitsigns toggle_linehl<cr>", desc =  "line highlight", },
+    { "<leader>gw", "<cmd>Gitsigns toggle_word_diff<cr>", desc = "word highlight", },
+    { "<leader>gs", "<cmd>Gitsigns toggle_signs<cr>", desc =  "sign-col highlight", },
+    { "<leader>m", group = "marks" },
+    { "<leader>ma", function() harpoon:list():append() end, desc =  "add file to quick-nav", },
+    { "<leader>mq", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, desc = "manage quick-nav", },
+    { "<leader>ms", function() telescope.marks() end, desc =  "search marks", },
+    { "<leader>c", group = "config" },
+    { "<leader>cf", function() telescope.find_files({ cwd = config_dir }) end, desc =  "file", },
+    { "<leader>cg", function() telescope.live_grep({ cwd = config_dir }) end, desc = "grep", },
+    { "<leader>y", "\"+y", desc = "clipboard yank", },
 })
-wk.register({
-    f = {
-        name = "find",
-        f = {
-            function() telescope.git_files({ use_git_root = false }) end,
-            "files (git)",
-        },
-        F = {
-            function() telescope.find_files() end,
-            "files (all)",
-        },
-        g = {
-            function() telescope.live_grep() end,
-            "grep",
-        },
-        b = {
-            function() telescope.buffers() end,
-            "buffers",
-        },
-        t = {
-            "<cmd>Telescope<cr>",
-            "telescope",
-        },
-        w = {
-            function()
-                local word = vim.fn.expand("<cword>")
-                telescope.grep_string({ search = word })
-            end,
-            "grep (<cword>)"
-        },
-        W = {
-            function()
-                local word = vim.fn.expand("<cWORD>")
-                telescope.grep_string({ search = word })
-            end,
-            "grep (<cWORD>)"
-        },
-        q = {
-            function() telescope.quickfix() end,
-            "quickfix",
-        },
-        s = {
-            function() telescope.git_status() end,
-            "git-status",
-        },
-    },
-    g = {
-        name = "git-toggles",
-        b = {
-            "<cmd>Gitsigns toggle_current_line_blame<cr>",
-            "blame",
-        },
-        l = {
-            "<cmd>Gitsigns toggle_linehl<cr>",
-            "line highlight",
-        },
-        w = {
-            "<cmd>Gitsigns toggle_word_diff<cr>",
-            "word highlight",
-        },
-        s = {
-            "<cmd>Gitsigns toggle_signs<cr>",
-            "sign-col highlight",
-        },
-    },
-    m = {
-        name = "marks",
-        a = {
-            function() harpoon:list():append() end,
-            "add file to quick-nav",
-        },
-        q = {
-            function() harpoon.ui:toggle_quick_menu(harpoon:list()) end,
-            "manage quick-nav",
-        },
-        s = {
-            function() telescope.marks() end,
-            "search marks",
-        },
-    },
-    c = {
-        name = "config",
-        f = {
-            function() telescope.find_files({ cwd = config_dir }) end,
-            "file",
-        },
-        g = {
-            function() telescope.live_grep({ cwd = config_dir }) end,
-            "grep",
-        },
-    },
-    y = { "\"+y", "clipboard yank" },
-    Y = { "\"+y", "clipboard yank line" },
-}, normal_opts)
-
--- Visual mode binds (pretty yanky atm with leader == space)
-local visual_opts = {
-    mode = "n",
-    prefix = "<leader>",
-    buffer = nil,
-    silent = true,
-    noremap = true,
-    nowait = false,
-    expr = false,
-}
-wk.register({
-    y = { "\"+y", "clipboard yank" },
-}, visual_opts)
 
 --- Attachs LSP related keymaps to the specified buffer
 -- The leader keys used via which-key is created globally though
 function M.lsp_attach(bufopts)
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
-
-    local opts = {
-        mode = "n",
-        prefix = "<leader>",
-        buffer = bufopts.buffer,
-        silent = true,
-        noremap = true,
-        nowait = false,
-        expr = false,
-    }
-    wk.register({
-        l = {
-            name = "lsp",
-            a = { function() vim.lsp.buf.code_action() end, "code action" },
-            r = {
-                name = "reference",
-                c = {
-                    function() require("telescope.builtin").lsp_incoming_calls() end,
-                    "incoming calls"
-                },
-                C = {
-                    function() require("telescope.builtin").lsp_outgoing_calls() end,
-                    "outgoing calls"
-                },
-                r = {
-                    function() require("telescope.builtin").lsp_references() end,
-                    "list"
-                },
-                n = { function() vim.lsp.buf.rename() end, "rename" },
-            },
-            f = {
-                function() vim.lsp.buf.format({ async = true }) end,
-                "format",
-            },
-            s = {
-                function() require("telescope.builtin").lsp_document_symbols() end,
-                "symbols (buffer)",
-            }
-        }
-    }, opts)
+    wk.add({
+        { "<leader>l", group = "lsp" },
+        { "<leader>la", function() vim.lsp.buf.code_action() end, desc = "code action" },
+        { "<leader>lf", function() vim.lsp.buf.format({ async = true }) end, desc = "format", },
+        { "<leader>ls", function() require("telescope.builtin").lsp_document_symbols() end, desc = "symbols (buffer)", },
+        { "<leader>lrc", function() require("telescope.builtin").lsp_incoming_calls() end, desc = "ref (incoming calls)" },
+        { "<leader>lrC", function() require("telescope.builtin").lsp_outgoing_calls() end, desc = "ref (outgoing calls)" },
+        { "<leader>lrr", function() require("telescope.builtin").lsp_references() end, desc = "ref (list)" },
+        { "<leader>lrn", function() vim.lsp.buf.rename() end, desc = "ref (rename)" },
+    })
     --[[
     vim.keymap.set('n', '<leader>lca', vim.lsp.buf.code_action, bufopts)
     vim.keymap.set('n', '<leader>lrr', vim.lsp.buf.references, bufopts)

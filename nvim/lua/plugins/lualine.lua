@@ -12,7 +12,7 @@ return {
       return rendered_path
     end
     local lsp_status = function()
-      local clients = vim.lsp.get_active_clients()
+      local clients = vim.lsp.get_clients()
       if table.maxn(clients) <= 0 then
           return "LSP Inactive"
       else
