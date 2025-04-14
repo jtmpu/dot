@@ -22,13 +22,7 @@ keymap("n", "<C-d>", "<C-d>zz", default_opts)
 keymap("n", "<C-u>", "<C-u>zz", default_opts)
 
 -- Marks and bookmark navigation
-local harpoon = require("harpoon")
-vim.keymap.set("n", "<C-f>", function() harpoon:list():select(1) end)
-vim.keymap.set("n", "<C-g>", function() harpoon:list():select(2) end)
-vim.keymap.set("n", "<C-n>", function() harpoon:list():select(3) end)
-vim.keymap.set("n", "<C-m>", function() harpoon:list():select(4) end)
-vim.keymap.set("n", "<C-t>", function() harpoon:list():select(5) end)
-vim.keymap.set("n", "<C-,>", function() harpoon:list():select(6) end)
+--
 -- Plugin and leader-heavy binds
 local wk = require("which-key")
 local telescope = require("telescope.builtin")
@@ -60,9 +54,6 @@ wk.add({
     { "<leader>gl", "<cmd>Gitsigns toggle_linehl<cr>", desc =  "line highlight", },
     { "<leader>gw", "<cmd>Gitsigns toggle_word_diff<cr>", desc = "word highlight", },
     { "<leader>gs", "<cmd>Gitsigns toggle_signs<cr>", desc =  "sign-col highlight", },
-    { "<leader>m", group = "marks" },
-    { "<leader>ma", function() harpoon:list():append() end, desc =  "add file to quick-nav", },
-    { "<leader>mq", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, desc = "manage quick-nav", },
     { "<leader>ms", function() telescope.marks() end, desc =  "search marks", },
     { "<leader>c", group = "config" },
     { "<leader>cf", function() telescope.find_files({ cwd = config_dir }) end, desc =  "file", },
