@@ -10,7 +10,6 @@ function M.start(config)
     end
 
     local opts = {
-        reuse_client = true,
         bufnr = bufnr,
     }
     return vim.lsp.start(config, opts)
