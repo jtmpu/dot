@@ -11,6 +11,20 @@ return {
     config = function()
         require("neo-tree").setup({
             close_if_last_window = true,
+            filesystem = {
+                follow_current_file = {
+                    enabled = true,
+                },
+                use_libuv_filewatcher = true,
+            },
+            event_handlers = {
+                {
+                    event = "file_opened",
+                    handler = function()
+                        require("neo-tree.sources.manager").close_all()
+                    end
+                }
+            },
             default_component_configs = {
                 diagnostics = {
                     symbols = {

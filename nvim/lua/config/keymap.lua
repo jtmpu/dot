@@ -66,6 +66,15 @@ wk.add({
 function M.lsp_attach(bufopts)
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+    vim.keymap.set('n', '<ctrl>k', function()
+        vim.diagnostic.open_float({
+            scope = "line",
+            border = "rounded",
+            focusable = true,
+            header = "Diagnostics:",
+            source = true, -- show if it's from rust-analyzer or clipper
+        })
+    end, bufopts)
     wk.add({
         { "<leader>l", group = "lsp" },
         { "<leader>la", function() vim.lsp.buf.code_action() end, desc = "code action" },
