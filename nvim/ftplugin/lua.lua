@@ -1,9 +1,14 @@
-local lspc = require("config.lsp")
-lspc.start({
+local lspc = require("user.lsp")
+
+-- enable highlighting
+vim.treesitter.start()
+
+-- enable LSP
+lspc.attach({
     name = 'lua-language-server',
     cmd = {'lua-language-server'},
     -- lua-language-server looks for .luarc.json in the workspace
-    root_dir = vim.fs.root(0, {'.git'}),
+    root_dir = vim.fs.root(0, {".git"}),
     settings = {
         Lua = {
             runtime = {

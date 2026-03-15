@@ -1,3 +1,4 @@
+-- Global settings
 local fn = vim.fn
 local opt = vim.opt
 local wo = vim.wo
@@ -46,11 +47,3 @@ vim.opt.termguicolors = true
 -- Disable netrw (from nvim-tree)
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
-
-vim.diagnostic.config({
-  virtual_text = true, -- This enables the inline text
-  signs = true,        -- Show signs in the gutter
-  underline = true,
-  update_in_insert = false, -- Don't spam while typing
-  severity_sort = true,
-})
