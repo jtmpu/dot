@@ -1,32 +1,38 @@
 local lspc = require("user.lsp")
-local server = "Lua"
-local cmd = {
-    "lua-language-server",
-}
+local server = "lua"
 
-local settings = {
+local root_dir = vim.fs.root(0, { ".git" }) or vim.fn.expand("%:p:h")
+
+local settings = lspc.load_settings(root_dir, server, {
+    cmd = { "lua-language-server" },
     [server] = {
-        runtime = {
-            version = "LuaJIT",
-        },
-        workspace = {
-            library = {
-                "${3rd}/luv/library",
-                vim.env.VIMRUNTIME,
+        ["Lua"] = {
+            runtime = {
+                version = "LuaJIT",
             },
-            checkThirdParty = false,
-        },
-        telemetry = {
-            enable = false,
+            workspace = {
+                library = {
+                    "${3rd}/luv/library",
+                    vim.env.VIMRUNTIME,
+                },
+                checkThirdParty = false,
+            },
+            telemetry = {
+                enable = false,
+            },
         },
     }
-}
+})
+
+if not settings then
+    return
+end
 
 -- enable LSP
 lspc.attach({
     name = server,
-    cmd = cmd,
+    cmd = settings["cmd"],
     -- lua-language-server looks for .luarc.json in the workspace
-    root_dir = vim.fs.root(0, {".git"}),
-    settings = settings,
+    root_dir = root_dir,
+    settings = settings[server],
 })

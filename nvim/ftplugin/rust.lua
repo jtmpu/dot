@@ -1,33 +1,34 @@
-local lspc = require("config.lsp")
-local server = "rust-analyzer"
-local cmd = {
-    "rust-analyzer",
-}
+local lspc = require("user.lsp")
+local server = "rust"
 
--- My rust repos are always git
-local root_dir = vim.fs.root(0, { ".git" })
-if not root_dir then
+local root_dir = vim.fs.root(0, { ".git" }) or vim.fn.expand("%:p:h")
+
+local settings = lspc.load_settings(root_dir, server, {
+    cmd = { "rust-analyzer" },
+    [server] = {
+        ["rust-analyzer"] = {
+            check = {
+                command = "clippy",
+            },
+            cargo = {
+                allFeatures = true,
+            },
+            procMacro = {
+                enable = true,
+            },
+        },
+    }
+})
+
+if not settings then
     return
 end
 
-local settings = {
-    [server] = {
-        check = {
-            command = "clippy",
-        },
-        cargo = {
-            allFeatures = true,
-        },
-        procMacro = {
-            enable = true,
-        },
-    }
-}
-
-lspc.start({
-    name = 'rust-analyzer',
-    cmd = cmd,
+-- enable LSP
+lspc.attach({
+    name = server,
+    cmd = settings["cmd"],
+    -- lua-language-server looks for .luarc.json in the workspace
     root_dir = root_dir,
-    settings = settings,
-    init_options = settings['rust-analyzer'],
+    settings = settings[server],
 })
