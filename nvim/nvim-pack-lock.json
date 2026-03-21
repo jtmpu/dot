@@ -35,9 +35,34 @@
       "src": "https://github.com/nvim-treesitter/nvim-treesitter",
       "version": "'main'"
     },
+    "oil.nvim": {
+      "rev": "0fcc83805ad11cf714a949c98c605ed717e0b83e",
+      "src": "https://github.com/stevearc/oil.nvim",
+      "version": "'master'"
+    },
+    "plenary.nvim": {
+      "rev": "50012918b2fc8357b87cff2a7f7f0446e47da174",
+      "src": "https://github.com/nvim-lua/plenary.nvim",
+      "version": "'v0.1.4'"
+    },
+    "telescope.nvim": {
+      "rev": "3333a52ff548ba0a68af6d8da1e54f9cd96e9179",
+      "src": "https://github.com/nvim-telescope/telescope.nvim",
+      "version": "'v0.2.1'"
+    },
     "tokyonight.nvim": {
       "rev": "5da1b76e64daf4c5d410f06bcb6b9cb640da7dfd",
       "src": "https://github.com/folke/tokyonight.nvim",
+      "version": "'main'"
+    },
+    "trouble.nvim": {
+      "rev": "bd67efe408d4816e25e8491cc5ad4088e708a69a",
+      "src": "https://github.com/folke/trouble.nvim",
+      "version": "'main'"
+    },
+    "which-key.nvim": {
+      "rev": "3aab2147e74890957785941f0c1ad87d0a44c15a",
+      "src": "https://github.com/folke/which-key.nvim",
       "version": "'main'"
     }
   }

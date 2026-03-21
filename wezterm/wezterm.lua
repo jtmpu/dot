@@ -1,32 +1,101 @@
 local wezterm = require("wezterm")
-local act = wezterm.action
+local config = wezterm.config_builder()
 
-return {
-    color_scheme = "Neutron",
-    -- window_decorations = "NONE",
-    enable_tab_bar = false,
-    leader = { key = "b", mods = "CTRL", timeout_milliseconds = 1000 },
-    -- Disable hyperlinks
-    hyperlink_rules = {},
-    keys = {
-        -- standard
-        { key = "F11", action = wezterm.action.ToggleFullScreen },
+-- Bind leader to tmux ctrl-b
+config.leader =  { key = "b", mods = "CTRL", timeout_milliseconds = 1000 }
 
-        -- copy & paste
-        { key = "C", mods = "CTRL|SHIFT", action = act.CopyTo "ClipboardAndPrimarySelection" },
-        { key = "V", mods = "CTRL|SHIFT", action = act.PasteFrom "Clipboard" },
+-- Binds for tmux
+config.keys = {
+    -- Fullscreen
+    {
+        key = 'F11',
+        action = wezterm.action.ToggleFullScreen,
+    },
+    -- Split panes (like tmux " and %)
+    {
+        mods = 'LEADER|SHIFT',
+        key = '"',
+        action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' },
+    },
+    {
+        mods = 'LEADER|SHIFT',
+        key = '%',
+        action = wezterm.action.SplitHorizontal { domain = 'CurrentPaneDomain' },
+    },
+    -- Navigate panes (like tmux Ctrl-b + arrow)
+    {
+        mods = 'LEADER',
+        key = 'h',
+        action = wezterm.action.ActivatePaneDirection 'Left',
+    },
+    {
+        mods = 'LEADER',
+        key = 'l',
+        action = wezterm.action.ActivatePaneDirection 'Right',
+    },
+    {
+        mods = 'LEADER',
+        key = 'k',
+        action = wezterm.action.ActivatePaneDirection 'Up',
+    },
+    {
+        mods = 'LEADER',
+        key = 'j',
+        action = wezterm.action.ActivatePaneDirection 'Down',
+    },
+    -- Create/Close Tabs (Windows in tmux lingo)
+    {
+        mods = 'LEADER',
+        key = 'c',
+        action = wezterm.action.SpawnTab 'CurrentPaneDomain',
+    },
+    {
+        mods = 'LEADER',
+        key = '&',
+        action = wezterm.action.CloseCurrentTab { confirm = true },
+    },
+    {
+        mods = 'LEADER',
+        key = 'n',
+        action = wezterm.action.ActivateTabRelative(1),
+    },
+    {
+        mods = 'LEADER',
+        key = 'p',
+        action = wezterm.action.ActivateTabRelative(-1),
+    },
+    -- Show a searchable list of tabs/panes
+    {
+        mods = 'LEADER',
+        key = 'w',
+        action = wezterm.action.ShowTabNavigator,
+    },
+    {
+        mods = 'LEADER',
+        key = 'z',
+        action = wezterm.action.TogglePaneZoomState,
+    },
 
-        -- tmux
-        -- split
-        { key = '"', mods = "LEADER|SHIFT", action = act.SplitVertical { domain = "CurrentPaneDomain" } },
-        { key = "%", mods = "LEADER|SHIFT", action = act.SplitHorizontal { domain = "CurrentPaneDomain" } },
-        -- manage
-        { key = "x", mods = "LEADER", action = act.CloseCurrentPane { confirm = true } },
-        { key = "z", mods = "LEADER", action = act.TogglePaneZoomState },
-        -- movement
-        { key = "LeftArrow",  mods = "LEADER", action = act.ActivatePaneDirection("Left") },
-        { key = "RightArrow", mods = "LEADER", action = act.ActivatePaneDirection("Right") },
-        { key = "UpArrow",    mods = "LEADER", action = act.ActivatePaneDirection("Up") },
-        { key = "DownArrow",  mods = "LEADER", action = act.ActivatePaneDirection("Down") },
+    -- Search
+    {
+        key = '/',
+        mods = 'LEADER',
+        action = wezterm.action.Search { CaseInSensitiveString = "" },
+    },
+
+    -- Copy/scroll mode
+    {
+        key = 's',
+        mods = 'LEADER',
+        action = wezterm.action.ActivateCopyMode,
     },
 }
+
+config.use_fancy_tab_bar = false
+config.tab_bar_at_bottom = true
+config.enable_tab_bar = false
+
+config.color_scheme = "Neutron"
+config.hyperlink_rules = {}
+
+return config
