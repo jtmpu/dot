@@ -3,7 +3,8 @@ local config = wezterm.config_builder()
 
 -- Bind leader to tmux ctrl-b
 config.leader =  { key = "b", mods = "CTRL", timeout_milliseconds = 1000 }
-
+config.harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }
+--
 -- Binds for tmux
 config.keys = {
     -- Fullscreen
