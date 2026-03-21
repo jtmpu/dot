@@ -7,8 +7,8 @@ local ERROR = vim.log.levels.ERROR
 --- Cmd is stored in settings["cmd"]
 --- @param root_dir string root directory of the repository
 --- @param server string the LSP server name, e.g. rust-analyzer
---- @param default table<string, boolean|string|number|unknown[]|nil|any>?
---- @return table<string, boolean|string|number|unknown[]|nil|any>?
+--- @param default table<string, boolean|string|number|unknown[]|vim.NIL>
+--- @return table<string, boolean|string|number|unknown[]|vim.NIL>?
 function M.load_settings(root_dir, server, default)
     local path = vim.fs.joinpath(root_dir, ".lsp", server .. ".json")
     local status, lines = pcall(vim.fn.readfile, path)
@@ -31,11 +31,6 @@ function M.load_settings(root_dir, server, default)
     local jsonstatus, settings = pcall(vim.json.decode, data)
     if not jsonstatus then
         vim.notify("[lsp:custom-settings] invalid json: " .. settings, ERROR)
-        return nil
-    end
-
-    if not settings[server] then
-        vim.notify("[lsp:custom-settings] json is missing server key '" .. server .. "'", ERROR)
         return nil
     end
 
