@@ -3,22 +3,18 @@ local server = "python"
 
 local root_dir = vim.fs.root(0, { ".git", ".lsp" }) or vim.fn.expand("%:p:h")
 
-local settings = lspc.load_settings(root_dir, server, {
-    cmd = { "pyright-langserver", "--stdio" },
-    ["pyright-langserver"] = {},
-})
-
-if not settings then
-    vim.notify("[python:lsp] no LSP settings found, aborting", vim.log.levels.ERROR)
-    return
-end
-
--- enable LSP
-lspc.attach({
+lspc.enable_fold(server)
+lspc.attach_with_override(server, {
     name = server,
-    ---@diagnostic disable-next-line
-    cmd = settings["cmd"],
-    -- lua-language-server looks for .luarc.json in the workspace
+    cmd = { "pyright-langserver", "--stdio" },
     root_dir = root_dir,
-    settings = settings,
+    settings = {
+        python = {
+            analysis = {
+                autoSearchPaths = true,
+                useLibraryCodeForTypes = true,
+                diagnosticMode = 'openFilesOnly',
+            },
+        },
+    },
 })

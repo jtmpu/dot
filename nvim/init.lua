@@ -59,17 +59,12 @@ local function plugins()
     })
 
     -- override global notification system
-    vim.notify = require("notify")
-    require("fidget").setup({
-        progress = {
-            display = {
-                -- Group multiple items from the same LSP
-                group_items = true,
-                -- Collapse them into a single line if they are similar
-                collapse = true,
-            },
-        },
+    require("notify").setup({
+        max_width = 80,
+        max_height = 10,
     })
+    vim.notify = require("notify")
+    require("fidget").setup({})
 
     require("ibl").setup()
 
@@ -102,6 +97,8 @@ local function plugins()
     ts.install({
         "lua",
         "bash",
+        "rust",
+        "python",
     })
 
     require("which-key").setup({
@@ -142,6 +139,9 @@ local function settings()
     -- Leader
     vim.g.mapleader = ' '
 
+    vim.cmd.colorscheme("tokyonight")
+    vim.opt.termguicolors = true
+
     -- Tabs, indents
     vim.opt.expandtab = true
     vim.opt.shiftwidth = 4
@@ -149,16 +149,11 @@ local function settings()
     vim.opt.smartindent = true
     vim.opt.autoindent = true
 
-    vim.opt.clipboard = "unnamedplus"
-
     vim.opt.updatetime = 300
     vim.opt.timeoutlen = 500
 
     vim.opt.undodir = vim.fn.expand("$HOME") .. "/.vimdid"
     vim.opt.undofile = true
-
-    vim.cmd.colorscheme("tokyonight")
-    vim.opt.termguicolors = true
 
     vim.opt.wrap = false
     vim.opt.scrolloff = 8
@@ -213,6 +208,7 @@ local function lsp()
     })
 end
 
+-- Configure most keymappings
 local function keymaps()
     local keymap = vim.api.nvim_set_keymap
     local default_opts = { noremap = true, silent = true }
