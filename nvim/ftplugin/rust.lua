@@ -8,7 +8,7 @@ if not root_dir then
 end
 
 lspc.enable_fold(server)
-lspc.attach_with_override(server, {
+lspc.attach(server, {
     name = server,
     cmd = { "rust-analyzer" },
     root_dir = root_dir,
